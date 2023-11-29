@@ -53,7 +53,7 @@ different repository. The distributed nature of VEX makes this disemination poss
 
 ### The OpenVEX discovery agent has two main jobs:
 
-1. Understanding what kind of repositories may contain openvex data for different
+1. Understanding what kind of repositories may contain OpenVEX data for different
 component types.
 2. Calling the relevant probers to look for and retrieve any OpenVEX documents
 in locations associated with an artifact. 
@@ -61,6 +61,7 @@ in locations associated with an artifact.
 ## Module Status
 
 We are slowly building backend drivers to support various use cases. The initial
-release supports package urls of type `oci` but we will contantly add more. If
-you want to support another type, feel free to open a pull request or file an 
-issue!
+release supports package urls of type `oci` but we will constantly add more. If
+you want support for other purl types, feel free to open a pull request or file
+an issue!
+
