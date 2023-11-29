@@ -114,9 +114,10 @@ func GenerateReferenceIdentifiers(refString, os, arch string) (IdentifiersBundle
 
 	archDString, err := crane.Digest(refString, crane.WithPlatform(platform))
 	if err != nil {
-		// If there is no arch-specific variant, we simply don't
-		// include it. Return what we know.
-		if strings.Contains(err.Error(), "no child with platform") {
+		// If there is no arch-specific variant ot the image has not been pushed
+		// yet, we simply don't include it. Return what we know.
+		if strings.Contains(err.Error(), "no child with platform") ||
+			strings.Contains(err.Error(), "MANIFEST_UNKNOWN") {
 			return bundle, nil
 		}
 		return bundle, fmt.Errorf("getting image digest: %w", err)

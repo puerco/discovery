@@ -62,6 +62,24 @@ func TestGenerateReferenceIdentifiers(t *testing.T) {
 			input:   "invalid reference",
 			mustErr: true,
 		},
+		{
+			name:  "alpine-blank",
+			input: "alpine@sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+			expected: IdentifiersBundle{
+				Identifiers: map[vex.IdentifierType][]string{
+					vex.PURL: {
+						"pkg:oci/alpine@sha256%3Affffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff?repository_url=index.docker.io%2Flibrary",
+						"pkg:oci/alpine@sha256%3Affffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff?arch=amd64&os=linux&repository_url=index.docker.io%2Flibrary",
+					},
+				},
+				Hashes: map[vex.Algorithm][]vex.Hash{
+					vex.SHA256: {
+						"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+					},
+				},
+			},
+			mustErr: false,
+		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			res, err := GenerateReferenceIdentifiers(tc.input, "linux", "amd64")
