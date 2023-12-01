@@ -32,9 +32,9 @@ func main() {
 	}
 
 	// The prober returns a document collection. Print how many we got.
-    fmt.Printf(
-        "Found %d OpenVEX documents associated to package URL\n", len(vexDocuments),
-    )
+	fmt.Printf(
+		"Found %d OpenVEX documents associated to package URL\n", len(vexDocuments),
+	)
 
 	for _, d := range vexDocuments {
 		fmt.Printf(" > Document ID: %s\n", d.ID)
