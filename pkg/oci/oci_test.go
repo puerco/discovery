@@ -58,6 +58,27 @@ func TestGenerateReferenceIdentifiers(t *testing.T) {
 			mustErr: false,
 		},
 		{
+			name:  "tagged reference",
+			input: "ghcr.io/chainguard-images/scanner-test:unfixed-vulnerabilities-wolfi",
+			expected: IdentifiersBundle{
+				Identifiers: map[vex.IdentifierType][]string{
+					vex.PURL: {
+						"pkg:oci/scanner-test@sha256%3A187aed5ea199cd16fcc41aa34ff467f918885e01ff8a1613e487018c41619a22?repository_url=ghcr.io%2Fchainguard-images",
+						"pkg:oci/scanner-test@sha256%3A187aed5ea199cd16fcc41aa34ff467f918885e01ff8a1613e487018c41619a22?arch=amd64&os=linux&repository_url=ghcr.io%2Fchainguard-images&tag=unfixed-vulnerabilities-wolfi",
+						"pkg:oci/scanner-test@sha256%3A9acfc37571750f53018d3c94dbd3353bee2f8b9792a2aa7ee43349dce0deac36?repository_url=ghcr.io%2Fchainguard-images",
+						"pkg:oci/scanner-test@sha256%3A9acfc37571750f53018d3c94dbd3353bee2f8b9792a2aa7ee43349dce0deac36?arch=amd64&os=linux&repository_url=ghcr.io%2Fchainguard-images&tag=unfixed-vulnerabilities-wolfi",
+					},
+				},
+				Hashes: map[vex.Algorithm][]vex.Hash{
+					vex.SHA256: {
+						"187aed5ea199cd16fcc41aa34ff467f918885e01ff8a1613e487018c41619a22",
+						"9acfc37571750f53018d3c94dbd3353bee2f8b9792a2aa7ee43349dce0deac36",
+					},
+				},
+			},
+			mustErr: false,
+		},
+		{
 			name:    "invalid reference",
 			input:   "invalid reference",
 			mustErr: true,
