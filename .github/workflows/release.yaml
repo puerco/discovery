@@ -17,10 +17,9 @@ jobs:
 
     steps:
       - name: Install publish-release
-        uses: puerco/release-actions/setup-publish-release@9975072608f4adfb73144e8fc76603a6910f365e # main
+        uses: kubernetes-sigs/release-actions/setup-publish-release@dd08496c83441d6477114cc0555b96d404dacff7 # v0.1.2
 
       - name: Publish Release
-        uses: puerco/release-actions/publish-release@9975072608f4adfb73144e8fc76603a6910f365e # main
+        uses: kubernetes-sigs/release-actions/publish-release@dd08496c83441d6477114cc0555b96d404dacff7 # v0.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
