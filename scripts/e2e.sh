@@ -6,6 +6,8 @@ crane push ./test/e2e/testdata/wolfi-base-sig/ localhost:5000/wolfi-base:sha256-
 crane push ./test/e2e/testdata/wolfi-base-docker.tar localhost:5000/notsigned:latest
 crane push ./test/e2e/testdata/alpine-cves localhost:5000/alpine-cves
 crane push ./test/e2e/testdata/alpine-cves.att localhost:5000/alpine-cves:sha256-eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978.att
+crane push ./test/e2e/testdata/scanner-test_unfixed-vulnerabilities-wolfi localhost:5000/scanner-test:unfixed-vulnerabilities-wolfi
+
 
 crane digest localhost:5000/wolfi-base:latest
 crane digest localhost:5000/wolfi-base:sha256-4d31ef1460be2813657ce7ab3cfd0df2a7366a9b72732d4978b2794cbeb8cd32.att
