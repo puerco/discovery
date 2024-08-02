@@ -12,6 +12,7 @@ import (
 	"github.com/openvex/go-vex/pkg/vex"
 	purl "github.com/package-url/packageurl-go"
 
+	"github.com/openvex/discovery/pkg/probers/git"
 	"github.com/openvex/discovery/pkg/probers/oci"
 
 	"github.com/openvex/discovery/pkg/discovery/options"
@@ -86,6 +87,28 @@ func (agent *Agent) ProbePurl(purlString string) ([]*vex.VEX, error) {
 	}
 
 	return docs, nil
+}
+
+// ProbeGitRepository takes a git repo URL and returns all the VEX data found
+func (agent *Agent) ProbeGitRepository(repoURL string) ([]*vex.VEX, error) {
+	prober := git.New()
+	//prober.SetOptions()
+	prober.FindDocumentsFromPurl()
+}
+
+func (agent *Agent) ProbeGitRepoForPurl(repoURL string, purlString string) ([]*vex.VEX, error) {
+	p, err := agent.impl.ParsePurl(purlString)
+	if err != nil {
+		return nil, fmt.Errorf("parsing purl: %w", err)
+	}
+
+	opts := agent.Options
+	opts.ProberOptions[""]
+
+	prober := git.New()
+	//prober.SetOptions()
+	prober.FindDocumentsFromPurl(agent.Options, p)
+
 }
 
 // TODO(puerco): ProbeSBOM
