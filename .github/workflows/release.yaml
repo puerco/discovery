@@ -18,7 +18,24 @@ jobs:
       contents: write # needed to write releases
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Generate SBOM
+        id: sbom
+        uses: carabiner-dev/actions/sbom/source@32587e82f960d49b36101e8c45d1956e511965d3 # v1.2.9
+        with:
+          format: spdx3
+          output-path: /tmp
+          codebases: "golang:." # Only generate the SBOM for the main go codebase
+
       - name: Publish Release
         uses: kubernetes-sigs/release-actions/publish-release@b5b8280a60e6e20607f77068011269b982c60971 # v0.4.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          assets: ${{ steps.sbom.outputs.files }}
+          sbom: false
