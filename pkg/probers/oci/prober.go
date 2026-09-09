@@ -306,7 +306,14 @@ func (di *defaultImplementation) DownloadDocuments(opts options.Options, se oci.
 			continue
 		}
 
-		docs = append(docs, &statement.Predicate)
+		if statement.Predicate == nil {
+			opts.Logger.WarnContext(
+				opts.Context, fmt.Sprintf("openvex attestation #%d has no predicate, ignoring", i),
+			)
+			continue
+		}
+
+		docs = append(docs, &statement.Predicate.VEX)
 	}
 
 	return docs, nil
